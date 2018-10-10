@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. /lib/functions/uci-defaults.sh
+
+case "$(board_name)" in
+"baikal,giant-b")
+	# enable gpio ports PA18 & PA10
+	# (used to put usb controller board into DFU mode)
+	echo 10 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio10/direction
+
+	echo 18 > /sys/class/gpio/export
+	echo out > /sys/class/gpio/gpio18/direction
+
+	# force exit dfu mode for connector board
+	echo 1 > /sys/class/gpio/gpio18/value
+	echo 0 > /sys/class/gpio/gpio10/value
+	echo 1 > /sys/class/gpio/gpio10/value
+	;;
+esac
+
+exit 0

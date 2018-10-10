@@ -118,6 +118,16 @@ endef
 TARGET_DEVICES += sun8i-h2-plus-orangepi-zero
 
 
+define Device/baikal-giant-b
+  DEVICE_TITLE:=Baikal Giant B
+  DEVICE_PACKAGES:=kmod-rtc-sunxi
+  SUPPORTED_DEVICES:=baikal,giant-b
+  SUNXI_DTS:=baikal-giant-b
+endef
+
+TARGET_DEVICES += baikal-giant-b
+
+
 define Device/sun8i-h2-plus-orangepi-r1
   DEVICE_TITLE:=Xunlong Orange Pi R1
   DEVICE_PACKAGES:=kmod-rtc-sunxi kmod-usb-net kmod-usb-net-rtl8152
