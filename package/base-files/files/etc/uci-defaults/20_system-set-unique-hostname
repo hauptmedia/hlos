@@ -1,0 +1,12 @@
+#!/bin/sh
+
+MODEL=$(cat /etc/board.json | jsonfilter -e '@["model"]["id"]' | tr , -)
+
+HOSTNAME=$MODEL-$(cat /sys/class/net/eth0/address | cut -d : -f 4- | sed -e 's/://g')
+
+uci set system.@system[0].hostname=$HOSTNAME
+uci set network.lan.hostname=$HOSTNAME
+
+uci commit
+
+exit 0
