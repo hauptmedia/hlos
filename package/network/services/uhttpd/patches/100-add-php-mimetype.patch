@@ -1,0 +1,10 @@
+--- a/mimetypes.h
++++ b/mimetypes.h
+@@ -32,6 +32,7 @@ static const struct mimetype uh_mime_typ
+ 	{ "css",     "text/css" },
+ 	{ "htm",     "text/html" },
+ 	{ "html",    "text/html" },
++	{ "php",     "text/html" },
+ 	{ "diff",    "text/x-patch" },
+ 	{ "patch",   "text/x-patch" },
+ 	{ "c",       "text/x-csrc" },
