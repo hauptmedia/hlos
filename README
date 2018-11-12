@@ -1,11 +1,14 @@
-  _______                     ________        __
- |       |.-----.-----.-----.|  |  |  |.----.|  |_
- |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
- |_______||   __|_____|__|__||________||__|  |____|
-          |__| W I R E L E S S   F R E E D O M
- -----------------------------------------------------
+   _                  _      _                    _ 
+  | |                | |    | |                  | |
+  | |__    __ _  ___ | |__  | |  __ _  _ __    __| |
+  | '_ \  / _` |/ __|| '_ \ | | / _` || '_ \  / _` |
+  | | | || (_| |\__ \| | | || || (_| || | | || (_| |
+  |_| |_| \__,_||___/|_| |_||_| \__,_||_| |_| \__,_|
+  
+        Hashland's Operating System for Miners
+		   based on OpenWRT
 
-This is the buildsystem for the OpenWrt Linux distribution.
+This is the buildsystem for the Hashland Linux distribution.
 
 To build your own firmware you need a Linux, BSD or MacOSX system (case
 sensitive filesystem required). Cygwin is unsupported because of the lack
@@ -27,8 +30,9 @@ toolchain, target system & firmware packages.
 the cross-compile toolchain and then cross-compile the Linux kernel & all
 chosen applications for your target system.
 
-Sunshine!
-	Your OpenWrt Community
-	http://www.openwrt.org
+Happy Mining!
+
+	Your      Hashland Team  &  OpenWrt Community
+	    https://hashland.cc     http://www.openwrt.org
 
 
