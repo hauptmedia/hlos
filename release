@@ -1,0 +1,48 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+	echo Usage: $0 release_version
+	exit 1
+fi
+
+VERSION=$1
+REPO_BASE_PUBLIC=http://cdn.hashland.cc/hlos
+REPO_BASE_DIR=/var/www/html/hlos
+
+for config in $(ls target_config); do
+	cp target_config/$config .config
+	echo CONFIG_VERSION_NUMBER=\"$VERSION\">>.config
+	echo CONFIG_VERSION_REPO=\"$REPO_BASE_PUBLIC/$VERSION\">>.config
+
+	rm -rf bin
+	make defconfig
+	make -j4
+
+	# uncompress all compressed images because we only want to publish uncompressed images
+	find bin/targets -name "*sdcard*gz" -exec gzip -d {} +
+
+	RSYNC_ARGS=""
+	if ssh root@cdn.hashland.cc mkdir $REPO_BASE_DIR/$VERSION/; then
+		RSYNC_ARGS=""
+	else
+		# do not update target once it was created
+		RSYNC_ARGS="--exclude targets/"
+	fi
+
+	rsync -avz $RSYNC_ARGS bin/ root@cdn.hashland.cc:$REPO_BASE_DIR/$VERSION/
+done
+
+release()
+{
+	NAME=$1
+	URL=$2
+
+	curl -s -H "Authorization: Bearer $API_KEY" -d "name=$NAME&version=$VERSION&url=$URL" https://api.hashland.cc/hlos-sysimages
+}
+
+
+. $HOME/.hashland
+
+release "baikal,giant-b" "$REPO_BASE_PUBLIC/$VERSION/targets/sunxi/cortexa7/hashland-$VERSION-sunxi-cortexa7-baikal-giant-b-squashfs-sdcard.img"
+
+
